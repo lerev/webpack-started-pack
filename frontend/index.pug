@@ -1,1 +1,27 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  body
+    header
+      nav.container
+      - var pages = ["Main", "About", "Contacts"];
+        ul.list-inline
+          for name in pages
+            li
+              a(href='#'+name) #{name}
 
+    #container.container
+      h1 Hello #{name}
+
+      p #{name}'s Pug source code!
+
+      img.imgClass#imgID(src="./images/bg.jpg" alt="Image Title")
+
+    footer
+      nav.container
+        ul.list-unstyled
+          - for (var x = 0; x < 3; x++)
+          li
+            a(href='#' + x) #{x}
+          -
