@@ -1,2 +1,2 @@
 # webpack-started-pack
-This a test webpack config
+This a started webpack config
