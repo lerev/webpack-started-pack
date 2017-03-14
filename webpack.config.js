@@ -44,11 +44,11 @@ const config = {
 
     module: {
         rules: [
-            // {
-            //     test: /\.html$/,
-            //     exclude: /node_modules/,
-            //     loader: 'html-loader'
-            // },
+            {
+                test: /\.html$/,
+                exclude: /node_modules/,
+                loader: 'html-loader'
+            },
             {
                 test: /\.(pug|jade)$/,
                 exclude: /node_modules/,
@@ -117,10 +117,7 @@ const config = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: "babel-loader",
-                        options: {
-                            presets: ['env']
-                        }
+                        loader: "babel-loader"
                     }
                 ]
             },
