@@ -9,7 +9,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
     context: path.resolve(__dirname, 'frontend'),
     entry: {
-        home: './js/app'
+        bundle: [
+            './js/app'
+        ]
     },
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -65,11 +67,11 @@ const config = {
                 ]
             },
             {
-                test: /\.css$/,
-                exclude: /node_modules/,
+                test: /\.(css)$/,
+                // exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: "style-loader",
-                    loader: [
+                    fallback: "style-loader",
+                    use: [
                         {
                             loader: 'css-loader',
                             options: {
@@ -89,8 +91,8 @@ const config = {
                 test: /\.(scss|sass)$/,
                 exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract({
-                    fallbackLoader: "style-loader",
-                    loader: [
+                    fallback: "style-loader",
+                    use: [
                         {
                             loader: 'css-loader',
                             options: {
