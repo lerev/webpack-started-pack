@@ -1,11 +1,34 @@
-'use strict';
-
-import '../css/bootstrap.css';
+import 'normalize.css';
+import 'reset-css';
 import '../css/app.scss';
 
-import {login} from './login';
+$('.send').on('click', function (e) {
+    e.preventDefault();
 
-login('admin', '111');
+    let thisForm = $(this).parents('form');
+    let formData = new FormData(thisForm[0]);
 
-console.log('App lo');
-console.log($('h1').text());
+    if (thisForm[0].checkValidity()) {
+        thisForm.find('input, select, textarea, .select-styled').css('border-color', '#51456e');
+
+        setTimeout(function () {
+            $.ajax({
+                url: thisForm.attr('action'),
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(data => {
+                thisForm[0].reset();
+                $('#callback-form').fadeIn().delay(1500).fadeOut();
+            });
+        }, 400);
+    } else {
+        for (let input of thisForm.find('input, select, textarea')) {
+            input.checkValidity() && (input.style.borderColor = '#51456e') || (input.style.borderColor = '#FF0000');
+        }
+    }
+});
+

@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -24,8 +22,9 @@ const config = {
     plugins: [
         new webpack.EnvironmentPlugin('NODE_ENV'),
         new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'frontend', 'index.pug'),
             filename: "index.html",
-            template: path.resolve(__dirname, 'frontend', 'index.pug')
+            filetype: 'pug'
         }),
         new ExtractTextPlugin({
             filename: "assets/css/[name].css",
@@ -89,7 +88,7 @@ const config = {
             },
             {
                 test: /\.(scss|sass)$/,
-                exclude: /node_modules/,
+                // exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style-loader",
                     use: [
@@ -124,7 +123,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(jpg|png|svg|ttf|eot|woff|woff2)$/,
+                test: /\.(ttf|eot|woff|woff2)$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -134,6 +133,28 @@ const config = {
                             name: 'assets/[path][name].[ext]'
                         }
                     }
+                ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                exclude: /node_modules/,
+                use: [
+                    // {
+                    //     loader: 'url-loader',
+                    //     options: {
+                    //         limit: 80000,
+                    //         name: 'assets/[path][name].[ext]'
+                    //     }
+                    // },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'assets/[path][name].[ext]'
+                        }
+                    },
+                    // {
+                    //     loader: 'image-webpack-loader'
+                    // }
                 ]
             }
         ]

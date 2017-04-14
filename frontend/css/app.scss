@@ -1,17 +1,227 @@
-@font-face {
-  font-family: 'Slabo';
-  src: url('../fonts/Slabo27px-Regular.ttf');
+@mixin transition($duration) {
+  -webkit-transition: $duration;
+  -moz-transition: $duration;
+  -o-transition: $duration;
+  transition: $duration;
 }
 
-body{
-  font-family: 'Slabo', sans-serif;
-  padding: 80px 0 0 0;
-  h1{
-    padding: 20px;
-    border: 1px solid #000000;
-    transition: .3s;
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  transform: $property;
+}
+
+@mixin font-face($font-family, $file-path, $font-weight, $font-style) {
+  @font-face {
+    font-family: $font-family;
+    src: url('#{$file-path}.eot'); /* IE9 Compat Modes */
+    src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('#{$file-path}.woff2') format('woff2'), /* Super Modern Browsers */
+    url('#{$file-path}.woff') format('woff'), /* Pretty Modern Browsers */
+    url('#{$file-path}.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('#{$file-path}.svg#svgFontName') format('svg'); /* Legacy iOS */
+    font-weight: $font-weight;
+    font-style: $font-style;
   }
-  img{
-    max-width: 100%;
+}
+
+@include font-face('MuseoSans', '../fonts/museosanscyrl-900', 900, normal);
+@include font-face('MuseoSans', '../fonts/museosanscyrl-700', 700, normal);
+@include font-face('MuseoSans', '../fonts/museosanscyrl-500', 500, normal);
+@include font-face('MuseoSans', '../fonts/museosanscyrl-100', 100, normal);
+
+html {
+  width: 100%;
+  height: 100%;
+  font-family: 'MuseoSans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  overflow: hidden;
+  body {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    background: #1a0f36;
+    * {
+      font-family: 'MuseoSans', sans-serif;
+    }
+    .left {
+      width: calc(50% - 2px);
+      height: 100%;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      @media (max-width: 768px) {
+        width: 0;
+      }
+      img {
+        max-width: 70%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate3d(-50%, -50%, 0));
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+      }
+    }
+    .right {
+      width: calc(50% - 2px);
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      @media (max-width: 768px) {
+        width: calc(90% - 4px);
+        padding: 5%;
+        text-align: center;
+      }
+      h1 {
+        margin: 0 0 60px 0;
+        font-weight: 900;
+        font-size: 30px;
+        letter-spacing: .7px;
+      }
+      form {
+        label {
+          width: 100%;
+          margin: 20px 0 0 0;
+          display: block;
+          input, textarea {
+            padding: 0 0 20px 0;
+            min-width: 65%;
+            font-weight: 500;
+            font-size: 18px;
+            color: #ffffff;
+            background: none;
+            border: none;
+            border-bottom: 2px solid #51456e;
+            resize: none;
+            position: relative;
+            @include transition(.3s);
+            &::-moz-placeholder {
+              color: #ffffff;
+              opacity: 1;
+              @include transition(opacity .3s ease);
+            }
+            &:-ms-input-placeholder {
+              color: #ffffff;
+              opacity: 1;
+              @include transition(opacity .3s ease);
+            }
+            &::-webkit-input-placeholder {
+              color: #ffffff;
+              opacity: 1;
+              @include transition(opacity .3s ease);
+            }
+            &:focus {
+              outline: none;
+              &::-moz-placeholder {
+                opacity: 0;
+              }
+              &:-ms-input-placeholder {
+                opacity: 0;
+              }
+              &::-webkit-input-placeholder {
+                opacity: 0;
+              }
+            }
+          }
+          textarea {
+            &::-moz-placeholder {
+              padding: 60px 0 0 0;
+            }
+            &:-ms-input-placeholder {
+              padding: 60px 0 0 0;
+            }
+            &::-webkit-input-placeholder {
+              padding: 60px 0 0 0;
+            }
+          }
+        }
+        button {
+          margin: 40px 0 0 0;
+          padding: 18px 85px 18px 36px;
+          font-weight: 500;
+          font-size: 12px;
+          letter-spacing: .8px;
+          text-transform: uppercase;
+          color: #ffffff;
+          background: #b76941 url('../images/button-layer.png') no-repeat right;
+          background-size: auto 100%;
+          border: none;
+          cursor: pointer;
+          @include transition(.3s);
+          &:hover {
+            background-color: #c1793a;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      h3 {
+        margin: 8% 0 10px;
+        font-weight: 900;
+        font-size: 16px;
+        letter-spacing: .6px;
+      }
+      .phones {
+        div {
+          width: 35%;
+          display: inline-block;
+          vertical-align: top;
+          @media (max-width: 768px) {
+            width: 100%;
+          }
+        }
+      }
+      a {
+        margin: 18px 0 0 0;
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: 100;
+        font-size: 16px;
+        letter-spacing: .6px;
+        text-decoration: none;
+        color: #ffffff;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+      footer {
+        margin: 5% 0 0 0;
+        span {
+          font-weight: 400;
+          font-size: 16px;
+          color: #625e6f;
+        }
+      }
+      #callback-form {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: -1px;
+        right: 0;
+        bottom: 0;
+        background: #1a0f36;
+        h3 {
+          position: absolute;
+          top: 50%;
+          font-weight: 900;
+          font-size: 30px;
+          letter-spacing: .7px;
+          @include transform(translate3d(0, -50%, 0));
+        }
+      }
+    }
   }
 }

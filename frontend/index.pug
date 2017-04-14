@@ -1,27 +1,47 @@
 doctype html
 html(lang="en")
   head
-    title= pageTitle
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    link(rel="icon" href="/assets/images/favicon.png")
+    meta(name="theme-color" content="#ffffff")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    title Edelweiss
   body
-    header
-      nav.container
-      - var pages = ["Main", "About", "Contacts"];
-        ul.list-inline
-          for name in pages
-            li
-              a(href='#'+name) #{name}
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q || []).push(arguments)},i[r].l=1 * new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    #container.container
-      h1 Hello #{name}
+      ga('create', 'UA-96349665-1', 'auto');
+      ga('send', 'pageview');
 
-      p #{name}'s Pug source code!
-
-      img.imgClass#imgID(src="./images/bg.jpg" alt="Image Title")
-
-    footer
-      nav.container
-        ul.list-unstyled
-          - for (var x = 0; x < 3; x++)
-          li
-            a(href='#' + x) #{x}
-          -
+    div.left
+      img.logo(src='images/logo.png' alt='Edelweiss')
+    div.right
+      h1 Старт проекту
+      form(method='POST' action='/mail.php')
+        label
+          input(name="name" placeholder="Ваше ім‘я" autocomplete="off" required)
+        label
+          input(name="contact" placeholder="Email чи телефон" autocomplete="off" required)
+        label
+          textarea(name="text" rows='4' autocomplete="off" placeholder="Ваше повідомлення")
+        button.send Відправити
+      div
+        h3 Юлія Добровольська
+        span Старший менеджер
+        div.phones
+          div
+            a(href='tel:+380987455511') +38 (098) 745 55 11
+          div
+            a(href='tel:+380637455511') +38 (063) 745 55 11
+          div
+            a(href='tel:+380507455511') +38 (050) 745 55 11
+      //  div
+      //    a(href='mailto:y.dobrovolskaya@gmail.com') y.dobrovolskaya@gmail.com
+      footer
+        span © 2017, Edelweiss.house
+      div#callback-form
+        h3 Дякуємо за підписку!
